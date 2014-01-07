@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61D0D519187C83CF00CE43A2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61D0D518187C83CF00CE43A2 /* AVFoundation.framework */; };
 		9417A96C1871E88300D9D37B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9417A96B1871E88300D9D37B /* Foundation.framework */; };
 		9417A96E1871E88300D9D37B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9417A96D1871E88300D9D37B /* CoreGraphics.framework */; };
 		9417A9701871E88300D9D37B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9417A96F1871E88300D9D37B /* UIKit.framework */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		61D0D518187C83CF00CE43A2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9417A9681871E88300D9D37B /* EZAudioFFTExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EZAudioFFTExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9417A96B1871E88300D9D37B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9417A96D1871E88300D9D37B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -105,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61D0D519187C83CF00CE43A2 /* AVFoundation.framework in Frameworks */,
 				9417A9D21871EA5900D9D37B /* Accelerate.framework in Frameworks */,
 				9417A9A61871E8A100D9D37B /* GLKit.framework in Frameworks */,
 				9417A9A41871E89500D9D37B /* AudioToolbox.framework in Frameworks */,
@@ -149,6 +152,7 @@
 		9417A96A1871E88300D9D37B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				61D0D518187C83CF00CE43A2 /* AVFoundation.framework */,
 				9417A9D11871EA5900D9D37B /* Accelerate.framework */,
 				9417A9A51871E8A100D9D37B /* GLKit.framework */,
 				9417A9A31871E89500D9D37B /* AudioToolbox.framework */,
@@ -498,6 +502,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EZAudioFFTExample/EZAudioFFTExample-Prefix.pch";
 				INFOPLIST_FILE = "EZAudioFFTExample/EZAudioFFTExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -511,6 +516,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EZAudioFFTExample/EZAudioFFTExample-Prefix.pch";
 				INFOPLIST_FILE = "EZAudioFFTExample/EZAudioFFTExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

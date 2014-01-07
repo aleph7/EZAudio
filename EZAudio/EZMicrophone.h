@@ -25,6 +25,7 @@
 
 #import  <Foundation/Foundation.h>
 #import  <AudioToolbox/AudioToolbox.h>
+#import  <AVFoundation/AVFoundation.h>
 #import  "AEFloatConverter.h"
 #import  "TargetConditionals.h"
 

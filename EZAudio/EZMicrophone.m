@@ -221,6 +221,7 @@ static OSStatus inputCallback(void                          *inRefCon,
   
   // Create localized copy of self
   EZMicrophone *microphone = (EZMicrophone*)self;
+  AVAudioSession* audioSession = [AVAudioSession sharedInstance];
   
   AudioComponentDescription inputComponentDescription = {
     .componentType         = kAudioUnitType_Output,
@@ -263,14 +264,7 @@ static OSStatus inputCallback(void                          *inRefCon,
              operation:"Couldn't enable input on the remote i/o unit"];
   
   // Get the hardware sample rate
-  Float64 hardwareSampleRate = 44100;
-#if !(TARGET_IPHONE_SIMULATOR)
-  UInt32 propSize = sizeof(hardwareSampleRate);
-  [EZAudio checkResult:AudioSessionGetProperty(kAudioSessionProperty_CurrentHardwareSampleRate,
-                                               &propSize,
-                                               &hardwareSampleRate)
-             operation:"Could not get hardware sample rate"];
-#endif
+  Float64 hardwareSampleRate = [audioSession sampleRate];
   
   // Set the stream format
   microphone->streamFormat.mBitsPerChannel   = 8 * sizeof(AudioUnitSampleType);
@@ -280,25 +274,15 @@ static OSStatus inputCallback(void                          *inRefCon,
   microphone->streamFormat.mFormatFlags      = kAudioFormatFlagsCanonical | kAudioFormatFlagIsNonInterleaved;
   microphone->streamFormat.mFormatID         = kAudioFormatLinearPCM;
   microphone->streamFormat.mFramesPerPacket  = 1;
-	microphone->streamFormat.mSampleRate       = hardwareSampleRate;
+  microphone->streamFormat.mSampleRate       = hardwareSampleRate;
   
   // Get the buffer duration (approximate for simulator, real device will have it's preferred value set)
-  Float32 bufferDuration = 0.0232;
-  UInt32 propertySize = sizeof(bufferDuration);
-#if !(TARGET_IPHONE_SIMULATOR)
-  [EZAudio checkResult:AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareIOBufferDuration,
-                                               sizeof(propertySize),
-                                               &bufferDuration)
-             operation:"Couldn't set the preferred buffer duration"];
-  // Get the preferred buffer size
-  [EZAudio checkResult:AudioSessionGetProperty(kAudioSessionProperty_CurrentHardwareIOBufferDuration,
-                                               &propertySize,
-                                               &bufferDuration)
-             operation:"Could not get preferred buffer size"];
-#endif
+  NSTimeInterval bufferDuration = 0.0232;
+  [audioSession setPreferredIOBufferDuration:bufferDuration error:NULL];
+  bufferDuration = audioSession.IOBufferDuration;
   
   // Create the audio buffer list and pre-malloc the buffers in the list
-  propertySize = offsetof( AudioBufferList, mBuffers[0] ) + ( sizeof( AudioBuffer ) * microphone->streamFormat.mChannelsPerFrame );
+  UInt32 propertySize = offsetof( AudioBufferList, mBuffers[0] ) + ( sizeof( AudioBuffer ) * microphone->streamFormat.mChannelsPerFrame );
   microphone->microphoneInputBuffer = (AudioBufferList*)malloc(propertySize);
   
   // Get the maximum number of frames
